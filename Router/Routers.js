@@ -41,13 +41,9 @@ route.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(error);
     }
 }));
-route.put('/:id', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const { firstname, lastname, dob, position, salary } = JSON.parse(req.body.data);
-    const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
+route.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const PlayerModel = { firstname, lastname, dob, position, salary, image };
-        const newPlayer = yield player_1.default.updateOne({ _id: req.params.id }, PlayerModel);
+        const newPlayer = yield player_1.default.updateOne({ _id: req.params.id }, req.body.data);
         res.json(newPlayer);
     }
     catch (error) {
